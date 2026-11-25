@@ -1163,6 +1163,24 @@ x < 0 OR x > 1;
 1 < x AND 3 < x;
 x > 3;
 
+5 >= x AND x < 5;
+x < 5;
+
+5 >= x OR x < 5;
+x <= 5;
+
+5 <= x AND x > 5;
+x > 5;
+
+5 <= x OR x > 5;
+x >= 5;
+
+NOT x > 5 AND x < 5;
+x < 5;
+
+NOT x < 5 OR x > 5;
+x >= 5;
+
 'a' < 'b';
 TRUE;
 

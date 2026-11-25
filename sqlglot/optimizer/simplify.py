@@ -1064,9 +1064,21 @@ class Simplifier:
 
                 for (a, av), (b, bv) in itertools.permutations(((left, l), (right, r))):
                     if isinstance(a, self.LT_LTE) and isinstance(b, self.LT_LTE):
-                        return left if (av > bv if or_ else av <= bv) else right
+                        if av == bv:
+                            return (
+                                left
+                                if (isinstance(left, exp.LTE) if or_ else isinstance(left, exp.LT))
+                                else right
+                            )
+                        return left if (av > bv if or_ else av < bv) else right
                     if isinstance(a, self.GT_GTE) and isinstance(b, self.GT_GTE):
-                        return left if (av < bv if or_ else av >= bv) else right
+                        if av == bv:
+                            return (
+                                left
+                                if (isinstance(left, exp.GTE) if or_ else isinstance(left, exp.GT))
+                                else right
+                            )
+                        return left if (av < bv if or_ else av > bv) else right
 
                     if not or_:
                         if isinstance(a, exp.LT) and isinstance(b, self.GT_GTE):
